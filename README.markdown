@@ -23,15 +23,15 @@ Following you will find the documentation from Anoop which I updated to reflect 
 It is inspired by node-xmpp (https://github.com/astro/node-xmpp) and xmppjs(http://github.com/mwild1/xmppjs) and
 it is API compatible with node-xmpp (except for the constructor).
 
-It is an xmpp library which lets you establish a persistent session to xmpp server 
+It is an xmpp library which lets you establish a persistent session to xmpp server
 via a bosh-server and communicate willingly.
 
 ## Documentation for API ##
 
 * Constructor: `Client(jid, password, bosh, route)`  
-		
+
 		Parameters:  
-		
+
             *jid*       : [String] jabber id of user (e.g. `user@example.com/office`)  
             *password*  : [String] password  
             *bosh*      : [String] url of the bosh-server (e.g. `http://localhost:5280/http-bind/`)  
@@ -41,36 +41,36 @@ via a bosh-server and communicate willingly.
             new Client Object having following properties:  
 
 	1. Event-emitter for the following events
-	
+
 		`online`
 			Event-listener: `function callback()`
-	
+
 		`error`
 			Event-listener: `function callback(exception)`
-			
+
 			`exception[String]` is the description of error
 
 		`offline`
 			Event-listener: `function callback(condition)`
-					  
+
 			`condition[String]` is the description of reason for being offline
 
 		`stanza`
 			Event-listener: `function callback(stanza)`
-			
-			`stanza[Object]` is the ltx xml element. 
+
+			`stanza[Object]` is the ltx xml element.
 
 	2. Function: `send(stanza)`
-		
+
 		enqueues the stanza into the pending array to be sent to bosh-server on next Tick
 		parameters:
-		
+
 			*stanza* : [Object] ltx xml Element object
 
 	3. Function: `sendMessage(to, body, type = "chat")`
-	    
+
 		sends a message 'body' to jid 'to' with type set to 'type'
-		
+
 		parameters:
 
 			*to*   : [String] jid of receiver(e.g. `myfriend@example.com/home`)
@@ -78,7 +78,7 @@ via a bosh-server and communicate willingly.
 			*type* : [String] should only be among the permitted values of `type` for xmpp message stanza
 
 	4. Function: `disconnect()`
-	
+
 		sends immediately any pending stanzas, ends the stream by sending terminate packet.
 
 * Constructor `Element(xname, attrs)`
@@ -88,60 +88,65 @@ via a bosh-server and communicate willingly.
 * Function: `$build(xname, attrs)`
 
 		an alias for `new ltx.Element(xname, attrs)`
-		
+
 		Parameters:
-		
+
 			*xname* : [string] name for the xml element
 			*attrs* : [Object] containing all the attributes to set up
-			
+
 		Return value:
-		
+
 			a new ltx.Element object
 
 * Function: `$msg(attrs)`
 
 		an alias for `new ltx.Element("message", attrs)`
-		
+
 		Parameters:
-		
+
 			*attrs* : [Object] containing all the attributes to set up
-			
+
 		Return value:
-		
+
 			a new ltx.Element object
 
 * Function: `$iq(attrs)`
 
 		an alias for `new ltx.Element("iq", attrs)`
-		
+
 		Parameters:
-		
+
 			attrs : [Object] containing all the attributes to set up
-			
+
 		Return value:
-		
+
 			a new ltx.Element object
- 
+
 * Function: `$pres(attrs)`
 
 		an alias for `new ltx.Element("presence", attrs)`
-		
+
 		Parameters:
-		
+
 			*attrs* : [Object] containing all the attributes to set up
-			
+
 		Return value:
-		
+
 			a new ltx.Element object
+
+  Function: `setNoMoreResponse()`
+		Artificially set the OVER state in order to no longer answer or send on this connection.
+		This is useful if you are taking the rid/jid/sid to another connection and need this one
+		to stop being 'active' at that time.
 
 * Function: `setLogLevel(logLevel)`
 
 		sets the logLevel for module (use only when in serious problem i.e. debug mode).
-		
+
 		Parameters:
-		
+
 			*logLevel* : [String] permissible values:
-			
+
 			       *FATAL*	:	displays nothing [default]
 				   *ERROR*	:	displays error messages
 				   *INFO*	:	informs about important events

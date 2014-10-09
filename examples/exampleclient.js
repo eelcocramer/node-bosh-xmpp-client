@@ -1,10 +1,10 @@
 var xmpp = require("../lib/boshclient.js");
 
 //change this data accordingly
-var myjid = "me@example.com";
-var mypassword = "keepitsecret";
-var friend = "she@example.com";
-var bosh = "http://localhost:5280/http-bind";
+var myjid = "eelco@servicelab.org";
+var mypassword = "2cool4u";
+var friend = "eelco@servicelab.org/strangelove";
+var bosh = "http://xmpp.servicelab.org/http-bind";
 
 var me = new xmpp.Client(myjid + "/office", mypassword, bosh);
 
@@ -21,7 +21,7 @@ me.on('offline', function(reason) {
 me.on('online', function() {
 	console.log("It feals great to be Online!!!!");
 	me.sendMessage(myjid, 'i am also expecting to recieve the message');
-	
+
 	//main starts here
 	main();
 });
@@ -33,11 +33,11 @@ me.on('stanza', function(ltxe) {
 });
 
 var main = function() {
-	
+
 	//send initial presence packet
 	me.send(xmpp.$pres());
-	
-	//send a message to your friend 10 seconds and disconnect 5 seconds after that	
+
+	//send a message to your friend 10 seconds and disconnect 5 seconds after that
 	setTimeout(function() {
 		me.sendMessage(friend,'hi, this is maddy!!!');
 		setTimeout(function() {
