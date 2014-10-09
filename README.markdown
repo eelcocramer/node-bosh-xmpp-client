@@ -134,10 +134,9 @@ via a bosh-server and communicate willingly.
 
 			a new ltx.Element object
 
-  Function: `setNoMoreResponse()`
-		Artificially set the OVER state in order to no longer answer or send on this connection.
-		This is useful if you are taking the rid/jid/sid to another connection and need this one
-		to stop being 'active' at that time.
+* Function: `setNoMoreResponse()`
+
+		Artificially set the OVER state in order to no longer answer or send on this connection. This is useful if you are taking the rid/jid/sid to another connection and need this one to stop being 'active' at that time.
 
 * Function: `setLogLevel(logLevel)`
 
